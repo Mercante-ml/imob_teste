@@ -13,13 +13,8 @@ __pycache__/
 .vscode/        # Se você usa VS Code e não quer versionar suas configs locais
 db.sqlite3      # Se você usa SQLite em desenvolvimento e não quer versionar o banco
 
-
 # Ambientes virtuais
 venv/
 
 db.sqlite3
-
-
-
-
 staticfiles/

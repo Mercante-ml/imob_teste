@@ -20,7 +20,7 @@ services:
     
     # --- A CORREÇÃO ESTÁ AQUI ---
     # Trocamos 'runserver' pelo 'daphne' (servidor ASGI)
-    command: daphne -b 0.0.0.0 -p 8000 barbearia_projeto.asgi:application
+    entrypoint: /app/entrypoint.sh
     # ---------------------------
 
     volumes:

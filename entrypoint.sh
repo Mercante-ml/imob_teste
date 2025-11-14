@@ -9,7 +9,6 @@ python manage.py collectstatic --noinput
 echo "==> (Entrypoint) Rodando Migrações do Banco de Dados..."
 python manage.py migrate
 
-echo "==> (Entrypoint) Iniciando o Servidor Gunicorn..."
-# O 'exec' é crucial. Ele substitui o processo do script pelo gunicorn,
-# permitindo que o Render gerencie o servidor web corretamente.
-exec gunicorn barbearia_projeto.wsgi
+echo "==> (Entrypoint) Iniciando o Servidor Daphne..."
+# O 'exec' é crucial. Ele substitui o processo do script pelo daphne.
+exec daphne -b 0.0.0.0 -p 8000 barbearia_projeto.asgi:application
