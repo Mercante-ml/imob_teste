@@ -3,6 +3,7 @@
 # barbearia_app/views.py (VERSÃO COM MESES TRADUZIDOS)
 
 import json
+import barbearia_app.dashboards
 import traceback
 import re
 from django.shortcuts import render

@@ -6,32 +6,67 @@
     <title>{{ page_title }} - Painel</title>
     {% load static %}
     {% load plotly_dash %}
+    <link rel="stylesheet" href="httpshttps://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+    <style>
+        body {
+            background-color: #0F172A; /* Cor de fundo mais escura para combinar */
+            color: #E2E8F0; /* Cor de texto clara */
+        }
+        .painel-container {
+            background-color: #1E293B; /* Cor do container principal */
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .dash-nav a.active {
+            background-color: #3498DB;
+        }
+        /* Garante que os dropdowns do Dash sejam visíveis no tema escuro */
+        .Select-control {
+            background-color: #334155;
+        }
+        .Select-value-label, .Select-placeholder {
+            color: #E2E8F0 !important;
+        }
+        .Select-menu-outer {
+            background-color: #334155;
+        }
+        .Select-option {
+            color: #E2E8F0;
+        }
+        .Select-option.is-focused {
+            background-color: #475569;
+        }
+    </style>
 </head>
 <body>
-    <div class="painel-container">
-        
-        <div class="painel-header-branding">
-            {% if config.logo %}
-                <img src="{{ config.logo.url }}" alt="Logo" class="painel-logo">
-            {% endif %}
-            <div class="painel-titles">
-                <h1>{{ config.nome_exibicao }}</h1>
-                <span class="subtitle">Dashboard - Visão Geral</span>
+    <div class="container-fluid">
+        <div class="painel-container">
+            <div class="painel-header-branding">
+                {% if config.logo %}
+                    <img src="{{ config.logo.url }}" alt="Logo" class="painel-logo">
+                {% endif %}
+                <div class="painel-titles">
+                    <h1>{{ config.nome_exibicao }}</h1>
+                    <span class="subtitle">Dashboard - Visão Geral</span>
+                </div>
             </div>
+
+            <div class="dash-nav">
+                <a href="{% url 'dashboard_geral' %}" class="dash-button active">Visão Geral</a>
+                <a href="{% url 'painel_atendimento' %}" class="dash-button">Painel de Atendimento</a>
+                <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Barbeiro</a>
+                <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Serviço</a>
+                <a href="#" class="dash-button dash-button-disabled" title="Em breve">Análise Temporal</a>
+                <a href="#" class="dash-button dash-button-disabled" title="Em breve">Cliente</a>
+            </div>
+
+            <div class="mt-4">
+                {% plotly_app name="VisaoGeralDashboard" %}
+            </div>
+
         </div>
-
-        <div class="dash-nav">
-            <a href="{% url 'dashboard_geral' %}" class="dash-button active">Visão Geral</a>
-            <a href="{% url 'painel_atendimento' %}" class="dash-button">Painel de Atendimento</a>
-            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Barbeiro</a>
-            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Serviço</a>
-            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Análise Temporal</a>
-            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Cliente</a>
-        </div>
-
-        {% plotly_app name="VisaoGeralDashboard" %}
-
     </div>
 </body>
 </html>
