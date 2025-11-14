@@ -156,12 +156,9 @@ ASGI_APPLICATION = 'barbearia_projeto.asgi.application'
 # Configura o Redis (o "motor" do Channels)
 # Ele vai procurar um serviço chamado 'redis' no Docker
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('redis', 6379)],
-        },
-    },
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }
 
 # Configuração de segurança do Dash
