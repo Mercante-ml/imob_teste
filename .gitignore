@@ -23,3 +23,5 @@ db.sqlite3
 
 
 staticfiles/
+.env
+.env
