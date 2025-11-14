@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Barbearia</title>
+    {% load static %}
+    
+    {# --- LINHA PARA O FAVICON --- #}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"> 
+    {# Se o arquivo for .ico, mude type="image/x-icon" e o nome do arquivo #}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="chat-container">
+        
+        <div class="chat-header">
+            <div class="header-left">
+                {% if config.logo %}
+                    <img src="{{ config.logo.url }}" alt="Logo" class="chat-logo">
+                {% else %}
+                    <div class="logo-placeholder"></div>
+                {% endif %}
+            </div>
+            
+            <span class="chat-title">{{ config.nome_exibicao }}</span>
+            
+            <div class="header-right">
+                <div class="barber-pole"></div> 
+                
+                <div id="share-icon-button" 
+                     class="share-icon-button" 
+                     data-share-message="{{ config.mensagem_compartilhamento }}">
+                    <i class="bi bi-share-fill"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-box" id="chat-box"></div>
+        <div class="buttons-container" id="buttons-container"></div>
+        
+        <div class="chat-input" id="chat-input-area">
+            <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+            <button id="send-button">Enviar</button>
+        </div>
+        
+        <div class="global-navigation-buttons" id="global-navigation-buttons">
+            <button id="main-menu-fixed-button" class="chat-button menu-button" value="start_main_menu">Menu Principal</button>
+        </div>
+    </div>
+
+    {% if config.endereco_loja or config.link_maps %}
+    <div class="app-footer">
+        {% if config.endereco_loja %}
+            <span class="footer-address">{{ config.endereco_loja }}</span>
+        {% endif %}
+        
+        {% if config.link_maps %}
+            <a href="{{ config.link_maps }}" target="_blank" class="footer-map-link">
+                <i class="bi bi-geo-alt-fill"></i> Ver no Mapa
+            </a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% csrf_token %} 
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

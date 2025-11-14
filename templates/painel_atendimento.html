@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - {{ config.nome_exibicao }}</title>
+    {% load static %}
+
+    {# --- LINHA PARA O FAVICON --- #}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"> 
+    {# Se o arquivo for .ico, mude type="image/x-icon" e o nome do arquivo #}
+
+    {% load custom_filters %}
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+</head>
+<body>
+    <div class="painel-container">
+        
+        <div class="painel-header-branding">
+            {% if config.logo %}
+                <img src="{{ config.logo.url }}" alt="Logo" class="painel-logo">
+            {% endif %}
+            <div class="painel-titles">
+                <h1>{{ config.nome_exibicao }}</h1>
+                <span class="subtitle">Painel de Atendimento</span>
+            </div>
+        </div>
+
+        <div class="powerbi-button-container">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMzA3NjE5Y2ItZjhiYy00N2FmLTkxODktMTBkYzEyNzBkN2M0IiwidCI6ImY1YWJiZGMxLTIwY2QtNGYyZC05NWE2LWE2YTJiNTQ3MGM5OSJ9" target="_blank" class="powerbi-button"> 
+                Ver Relatórios no Power BI
+            </a>
+        </div>
+
+        <div class="date-navigation"> 
+            {% if view_type == 'daily' %}
+                <a href="?data={{ previous_day|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=daily&status={{ selected_status }}" class="nav-button">&lt; Dia Anterior</a>
+            {% else %}
+                <a href="?data={{ previous_week|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=weekly&status={{ selected_status }}" class="nav-button">&lt; Semana Anterior</a>
+            {% endif %}
+            
+            <div class="date-selector">
+                <label for="appointmentDate">Consultar Data:</label>
+                <input type="date" id="appointmentDate" name="data" data-selected-date="{{ selected_date|date:'Y-m-d' }}">
+            </div>
+            
+            {% if view_type == 'daily' %}
+                <a href="?data={{ next_day|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=daily&status={{ selected_status }}" class="nav-button">Próximo Dia &gt;</a>
+            {% else %}
+                <a href="?data={{ next_week|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=weekly&status={{ selected_status }}" class="nav-button">Próxima Semana &gt;</a>
+            {% endif %}
+        </div>
+
+        <div class="barbeiro-selector">
+            <label for="barbeiroFilter">Filtrar por Barbeiro:</label>
+            <select id="barbeiroFilter" name="barbeiro">
+                <option value="">Todos os Barbeiros</option>
+                {% for barbeiro in barbeiros %}
+                    <option value="{{ barbeiro.id }}" {% if barbeiro.id == selected_barbeiro_id %}selected{% endif %}>
+                        {{ barbeiro.nome_completo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="status-selector">
+            <label for="statusFilter">Filtrar por Status:</label>
+            <select id="statusFilter" name="status">
+                {% for option in status_options %}
+                    <option value="{{ option.value }}" {% if option.value == selected_status %}selected{% endif %}>
+                        {{ option.label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="view-switcher">
+            <a href="?data={{ selected_date|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=daily&status={{ selected_status }}" 
+               class="view-button {% if view_type == 'daily' %}active{% endif %}">Visão Diária</a>
+            <a href="?data={{ selected_date|date:'Y-m-d' }}&barbeiro={{ selected_barbeiro_id }}&view=weekly&status={{ selected_status }}" 
+               class="view-button {% if view_type == 'weekly' %}active{% endif %}">Visão Semanal</a>
+        </div>
+
+        {% if view_type == 'daily' %}
+            <h2>Agendamentos para {{ selected_date|date:"d/m/Y" }}</h2>
+            <div id="agendamentos-list">
+                {% if agendamentos %}
+                    {% for agendamento in agendamentos %}
+                        <div class="agendamento-item">
+                            <span class="hora">{{ agendamento.hora_inicio|time:"H:i" }}</span>
+                            <span class="cliente">{{ agendamento.cliente.nome_completo }}</span>
+                            <span class="barbeiro">({{ agendamento.barbeiro.nome_completo }})</span>
+                            <span class="servico">{{ agendamento.servico.nome_servico }}</span>
+                            <span class="status-display {{ agendamento.status }}">{{ agendamento.get_status_display }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-appointments">Nenhum agendamento encontrado para esta data ou barbeiro selecionado.</p>
+                {% endif %}
+            </div>
+        {% else %}
+        <h2>Agendamentos da Semana de {{ start_of_week|date:"d/m" }} a {{ end_of_week|date:"d/m/Y" }}</h2>
+            <div id="agendamentos-weekly-grid"> 
+                {% for day_obj in week_days_list %} 
+                    {% with current_day_obj_inner=day_obj %} 
+                        <div class="weekly-day-column">
+                            <h3>{{ current_day_obj_inner|date:"D d/m" }}</h3> 
+                            {% if agendamentos_por_dia|get_item:current_day_obj_inner %} 
+                                {% for agendamento in agendamentos_por_dia|get_item:current_day_obj_inner %}
+                                    <div class="agendamento-item-small">
+                                        <span class="hora">{{ agendamento.hora_inicio|time:"H:i" }}</span>
+                                        <span class="cliente">{{ agendamento.cliente.nome_completo }}</span>
+                                        <span class="servico">{{ agendamento.servico.nome_servico }}</span>
+                                        <span class="barbeiro">({{ agendamento.barbeiro.nome_completo }})</span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="no-appointments-small">Nenhum agendamento.</p>
+                            {% endif %}
+                        </div>
+                    {% endwith %} 
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <script src="{% static 'js/painel.js' %}"></script>
+    </body>
+    </html>

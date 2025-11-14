@@ -1,0 +1,329 @@
+/* static/css/style.css (VERSÃO FINAL E AJUSTADA COM ESTILOS PARA LISTA E BOTÃO INICIAR) */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    margin: 0;
+}
+
+.chat-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 600px; 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    flex-shrink: 0; 
+}
+
+.chat-box {
+    flex-grow: 1; 
+    padding: 15px;
+    overflow-y: auto; 
+    background-color: #e9ecef;
+    min-height: 100px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 80%;
+}
+
+.user {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.bot {
+    background-color: #ced4da; 
+    color: #333;
+    align-self: flex-start;
+    margin-right: auto;
+    padding: 15px; 
+}
+
+/* Estilos para a nova lista de agendamentos no chatbot */
+.agendamentos-list-chatbot {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin-top: 15px;
+    padding-bottom: 0; 
+}
+
+.agendamento-card {
+    background-color: #f0f2f5; /* Fundo claro para o cartão, contrastando com o balão cinza */
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.agendamento-card .card-header {
+    background-color: #007bff; /* Azul para o cabeçalho do cartão */
+    color: white;
+    padding: 8px 15px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.agendamento-card .card-body {
+    padding: 10px 15px;
+    color: #333; /* Texto escuro dentro do cartão claro */
+    font-size: 0.9em;
+}
+
+.agendamento-card .card-body p {
+    margin: 5px 0; /* Espaçamento entre parágrafos de detalhes */
+    line-height: 1.4;
+}
+
+.agendamento-card .card-body p strong {
+    color: #0056b3; /* Cor para os títulos de detalhe */
+}
+
+/* Estilos para os status badges dentro do cartão */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+/* Cores específicas para cada status */
+.status-badge.confirmado {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.status-badge.pendente {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
+}
+
+.status-badge.realizado { /* Embora não apareça no chatbot, bom ter para consistência */
+    background-color: #007bff; /* Azul */
+    color: white;
+}
+
+.status-badge.cancelado { /* Embora não apareça no chatbot, bom ter para consistência */
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+
+/* Estilos para os botões dinâmicos (opções de serviço, etc.) */
+.buttons-container {
+    display: none; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 15px;
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    gap: 5px; 
+    flex-shrink: 0; 
+}
+
+.chat-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px; /* Mantenha uma margem para espaçamento */
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    
+    /* Ajuste para que os botões sejam mais flexíveis */
+    flex: 1 1 auto; /* Permite que o botão cresça e encolha, mas tenta manter o tamanho */
+    min-width: 80px; /* Reduza um pouco o min-width para caber mais em telas menores */
+    max-width: calc(50% - 10px); /* Ajusta para 2 colunas, considerando a margem */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+.chat-button:hover {
+    background-color: #218838;
+}
+
+/* Estilos para botões específicos por classe adicionada via JS */
+.chat-button.cancel-button {
+    background-color: #dc3545; /* Vermelho para cancelar */
+    color: white;
+}
+.chat-button.cancel-button:hover {
+    background-color: #c82333;
+}
+
+.chat-button.rebook-button {
+    background-color: #ffc107; /* Amarelo para reagendar */
+    color: #333; /* Texto escuro para melhor contraste */
+}
+.chat-button.rebook-button:hover {
+    background-color: #e0a800;
+}
+
+.chat-button.confirm-button {
+    background-color: #007bff; /* Azul para confirmar */
+    color: white;
+}
+.chat-button.confirm-button:hover {
+    background-color: #0056b3;
+}
+
+.chat-button.action-button { /* Para botões como 'Iniciar' e 'Reset' */
+    background-color: #6c757d; /* Cinza para ações gerais (manter para reset) */
+    color: white;
+}
+.chat-button.action-button:hover {
+    background-color: #5a6268;
+}
+
+/* NOVO: Estilo específico e mais chamativo para o botão "Iniciar" */
+.chat-button[value="start_chat"] {
+    background-color: #20c997; /* Um verde/ciano vibrante */
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px; /* Um pouco maior para destaque */
+    font-size: 1em;
+}
+.chat-button[value="start_chat"]:hover {
+    background-color: #17a2b8;
+}
+
+
+/* Os botões de navegação global ('Menu Principal', 'Agendar/Gerenciar')
+   também são categorizados como 'menu-button' no script.js.
+   Precisamos garantir que as regras específicas para 'start_booking'
+   e 'start_rebooking' tenham maior especificidade ou venham depois. */
+
+.chat-button.menu-button { /* Para botões de navegação global ('Menu Principal') */
+    background-color: #17a2b8; /* Azul claro/ciano para menu padrão */
+    color: white;
+}
+.chat-button.menu-button:hover {
+    background-color: #138496;
+}
+
+/* NOVO ESTILO (MOVIDO PARA BAIXO PARA SOBRESCREVER menu-button se aplicado):
+   Botão "Agendar Serviço" (maior destaque) */
+.chat-button[value="start_booking"] {
+    background-color: #00a884; /* Um verde/teal mais vibrante */
+    color: white;
+    font-weight: bold;
+}
+.chat-button[value="start_booking"]:hover {
+    background-color: #00896b;
+}
+
+/* NOVO ESTILO (MOVIDO PARA BAIXO PARA SOBRESCREVER menu-button se aplicado):
+   Botão "Gerenciar Agendamentos" (diferente do agendar) */
+.chat-button[value="start_rebooking"] {
+    background-color: #8b6eaf; /* Um tom de roxo/lilás */
+    color: white;
+}
+.chat-button[value="start_rebooking"]:hover {
+    background-color: #6c4b8e;
+}
+
+
+/* Botões 'Sim'/'Não' para validações (ex: telefone, nome) */
+.chat-button[value^="sim_"], .chat-button[value^="nao_"] {
+    background-color: #6f42c1; /* Roxo para 'Sim'/'Não' específicos */
+    color: white;
+}
+.chat-button[value^="sim_"]:hover, .chat-button[value^="nao_"]:hover {
+    background-color: #5a36a3;
+}
+
+/* Botão 'Sim' de retentativa (ex: yes_retry_phone) */
+.chat-button[value^="yes_retry_"] {
+    background-color: #20c997; /* Verde água */
+    color: white;
+}
+.chat-button[value^="yes_retry_"]:hover {
+    background-color: #17a2b8;
+}
+
+/* Novo estilo para botões de opção padrão (serviços, dias, horas) - será verde padrão */
+.chat-button.default-option-button {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+.chat-button.default-option-button:hover {
+    background-color: #218838;
+}
+
+/* Estilos para o container de botões fixos */
+.global-navigation-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 15px;
+    border-top: 1px solid #dee2e6;
+    background-color: #f0f2f5;
+    flex-shrink: 0; /* Garante que os botões fixos não encolham */
+}
+
+.global-navigation-buttons .chat-button {
+    width: auto;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px 15px;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0; 
+    gap: 10px; 
+}
+
+.chat-input input {
+    flex-grow: 1;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 1em;
+    outline: none;
+    min-width: 50px; 
+}
+
+.chat-input button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    /* REMOVIDO/AJUSTADO: Remova ou comente esta linha para eliminar a margem forçada */
+    /* margin-left: 10px; */ 
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    /* NOVO: Garante que o botão não encolha */
+    flex-shrink: 0; 
+}
+
+.chat-input button:hover {
+    background-color: #0056b3;
+}

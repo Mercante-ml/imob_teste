@@ -1,0 +1,203 @@
+/* static/css/painel.css (VERSÃO FINAL - COM DASHBOARD UNIFICADO) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #141E30; 
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; 
+}
+
+.painel-container {
+    background: linear-gradient(180deg, #243B55 0%, #141E30 100%);
+    border-radius: 15px;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(52, 152, 219, 0.1);
+    width: 95%;
+    max-width: 1200px; 
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 1s ease-out; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CABEÇALHO DO PAINEL --- */
+.painel-header-branding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+.painel-logo { height: 60px; width: auto; object-fit: contain; border-radius: 5px; }
+.painel-titles { text-align: left; display: flex; flex-direction: column; }
+h1 { color: #FFFFFF; font-size: 2.5em; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(52, 152, 219, 0.2); line-height: 1.1; }
+.subtitle { color: #bdc3c7; font-size: 1.2em; font-weight: 400; }
+h2 { color: #f0f0f0; font-size: 1.8em; margin-top: 25px; margin-bottom: 20px; border-bottom: 1px solid #34495e; padding-bottom: 10px; }
+
+/* --- PAINEL DE ATENDIMENTO (LISTA) --- */
+#agendamentos-list { display: flex; flex-direction: column; gap: 15px; max-height: 60vh; overflow-y: auto; padding-right: 10px; }
+.agendamento-item { background-color: #2c3e50; border-left: 5px solid #3498DB; padding: 15px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 1.2em; animation: slideInLeft 0.7s ease-out; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.agendamento-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.7), 0 0 15px 2px rgba(52, 152, 219, 0.2); }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+.agendamento-item .hora { font-weight: bold; color: #5DADE2; min-width: 70px; text-align: left; }
+.agendamento-item .cliente { flex-grow: 1; text-align: left; margin-left: 20px; font-weight: 500; }
+.agendamento-item .barbeiro { font-style: italic; color: #bdc3c7; margin-left: 15px; min-width: 120px; text-align: right; }
+.agendamento-item .servico { background-color: #34495e; color: #eee; padding: 5px 10px; border-radius: 8px; font-size: 0.9em; margin-left: 15px; }
+.agendamento-item .status-display { padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 0.9em; margin-left: 15px; white-space: nowrap; }
+.agendamento-item .status-display.confirmado { background-color: #2ecc71; color: white; }
+.agendamento-item .status-display.pendente { background-color: #f1c40f; color: #333; }
+.agendamento-item .status-display.realizado { background-color: #3498DB; color: white; }
+.agendamento-item .status-display.cancelado { background-color: #e74c3c; color: white; }
+.no-appointments { text-align: center; color: #aaa; padding: 20px; font-size: 1.2em; }
+
+/* --- PAINEL DE ATENDIMENTO (FILTROS) --- */
+.date-navigation { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+.date-selector { display: flex; align-items: center; gap: 10px; margin: 5px 0; }
+.date-selector label { white-space: nowrap; }
+.date-selector input[type="date"] { padding: 8px; border-radius: 5px; border: 1px solid #34495e; background-color: #2c3e50; color: #eee; font-size: 1em; cursor: pointer; outline: none; flex-grow: 1; min-width: 150px; }
+.date-selector input[type="date"]::-webkit-datetime-edit { color: #eee; }
+.date-selector input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+.nav-button { background-color: #555; color: #eee; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s ease, box-shadow 0.2s ease; white-space: nowrap; display: flex; align-items: center; justify-content: center; min-width: 100px; }
+.nav-button:hover { background-color: #777; box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.15); }
+
+.barbeiro-selector, .status-selector { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; gap: 10px; flex-wrap: wrap; }
+.barbeiro-selector label, .status-selector label { color: #f0f0f0; font-size: 1.1em; white-space: nowrap; }
+.barbeiro-selector select, .status-selector select { padding: 8px; border-radius: 5px; border: 1px solid #34495e; background-color: #2c3e50; color: #eee; font-size: 1em; cursor: pointer; outline: none; flex-grow: 1; min-width: 180px; }
+.barbeiro-selector select:hover, .status-selector select:hover { border-color: #3498DB; } 
+
+.view-switcher { display: flex; justify-content: center; margin-bottom: 20px; gap: 10px; flex-wrap: wrap; }
+.view-button { background-color: #555; color: #eee; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; white-space: nowrap; min-width: 120px; text-align: center; }
+.view-button:hover { background-color: #777; box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.15); }
+.view-button.active { background-color: #3498DB; color: #ffffff; box-shadow: 0 0 15px 0px rgba(52, 152, 219, 0.5); }
+
+/* --- PAINEL DE ATENDIMENTO (SEMANAL) --- */
+#agendamentos-weekly-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; overflow-x: auto; padding-bottom: 10px; justify-content: center; }
+.weekly-day-column { background-color: #2c3e50; border-radius: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: left; min-height: 250px; display: flex; flex-direction: column; }
+.weekly-day-column h3 { color: #5DADE2; font-size: 1.3em; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #34495e; padding-bottom: 5px; text-align: center; }
+.agendamento-item-small { background-color: #34495e; padding: 8px 10px; border-radius: 5px; margin-bottom: 8px; font-size: 0.9em; line-height: 1.4; transition: background-color 0.2s ease; }
+.agendamento-item-small:hover { background-color: #4e6a85; }
+.agendamento-item-small .hora { font-weight: bold; color: #3498DB; display: block; } 
+.agendamento-item-small .cliente, .agendamento-item-small .barbeiro, .agendamento-item-small .servico { display: block; color: #ccc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agendamento-item-small .barbeiro { font-style: italic; font-size: 0.85em; }
+.no-appointments-small { font-size: 0.9em; color: #aaa; text-align: center; padding: 10px 0; }
+
+.powerbi-button-container { margin-bottom: 25px; text-align: center; }
+.powerbi-button { background-color: #0078d4; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+.powerbi-button:hover { background-color: #005a9e; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 15px 0px rgba(0, 120, 212, 0.5); }
+
+/* =============================================== */
+/* --- ESTILOS DO DASHBOARD (GERADO PELO DASH) --- */
+/* =============================================== */
+
+/* Navegação entre Painel e Dash */
+.dash-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 15px;
+}
+.dash-button {
+    background-color: #555;
+    color: #eee;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex-grow: 1; 
+    text-align: center;
+}
+.dash-button:hover { background-color: #777; }
+.dash-button.active { background-color: #3498DB; color: #ffffff; }
+.dash-button-disabled { background-color: #444; color: #888; cursor: not-allowed; }
+.dash-button-disabled:hover { background-color: #444; }
+
+/* Filtros (gerados pelo Dash) */
+.dashboard-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.dashboard-filters .dash-dropdown { color: #333; } /* Cor do texto dentro do dropdown */
+
+/* Grid dos Gráficos (3 Colunas) */
+.dashboard-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Card Padrão do Gráfico */
+.dash-card {
+    background-color: #2c3e50; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    min-height: 300px; /* Altura mínima para gráficos */
+}
+
+.dash-card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #bdc3c7; 
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 10px;
+}
+
+/* Ajuste fino para os KPIs (Métricas) */
+.dash-card.kpi-grid { padding-top: 0; }
+
+/* O Plotly Dash injeta seu próprio CSS, isso garante que ele se encaixe */
+.dash-card .dash-graph {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- MÍDIA QUERIES (Responsivo) --- */
+@media (max-width: 1200px) { .painel-container { max-width: 900px; } }
+
+@media (max-width: 1024px) { 
+    .painel-container { max-width: 760px; } 
+    #agendamentos-weekly-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    /* Dashboard passa para 2 colunas */
+    .dashboard-grid-3col { grid-template-columns: 1fr 1fr; }
+    .dashboard-grid-3col .dash-card:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) { 
+    .painel-container { padding: 20px; width: 98%; max-width: none; } 
+    h1 { font-size: 2em; } 
+    .date-navigation, .barbeiro-selector, .view-switcher, .status-selector, .dashboard-filters { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+    .date-selector, .barbeiro-selector select, .view-button, .nav-button, .status-selector select { 
+        width: 100%; 
+        margin: 5px 0; 
+    }
+    .date-selector input[type="date"] { width: calc(100% - 20px); }
+    .agendamento-item { flex-direction: column; align-items: flex-start; gap: 5px; } 
+    .agendamento-item .hora, .agendamento-item .cliente, .agendamento-item .barbeiro, .agendamento-item .servico { 
+        margin: 0; 
+        width: 100%; 
+        text-align: left; 
+    }
+    #agendamentos-weekly-grid { grid-template-columns: 1fr; }
+    .powerbi-button { width: calc(100% - 40px); }
+    
+    /* Dashboard passa para 1 coluna */
+    .dashboard-grid-3col { grid-template-columns: 1fr; }
+    .dashboard-grid-3col .dash-card:last-child { grid-column: auto; }
+}

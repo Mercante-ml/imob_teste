@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} - Painel</title>
+    {% load static %}
+    {% load plotly_dash %}
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}">
+</head>
+<body>
+    <div class="painel-container">
+        
+        <div class="painel-header-branding">
+            {% if config.logo %}
+                <img src="{{ config.logo.url }}" alt="Logo" class="painel-logo">
+            {% endif %}
+            <div class="painel-titles">
+                <h1>{{ config.nome_exibicao }}</h1>
+                <span class="subtitle">Dashboard - Visão Geral</span>
+            </div>
+        </div>
+
+        <div class="dash-nav">
+            <a href="{% url 'dashboard_geral' %}" class="dash-button active">Visão Geral</a>
+            <a href="{% url 'painel_atendimento' %}" class="dash-button">Painel de Atendimento</a>
+            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Barbeiro</a>
+            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Visão Serviço</a>
+            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Análise Temporal</a>
+            <a href="#" class="dash-button dash-button-disabled" title="Em breve">Cliente</a>
+        </div>
+
+        {% plotly_app name="VisaoGeralDashboard" %}
+
+    </div>
+</body>
+</html>

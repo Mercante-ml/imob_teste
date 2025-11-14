@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Banco de dados local (NUNCA coloque no container)
+db.sqlite3
+*.sqlite3
+
+# Arquivos de ambiente (NUNCA coloque na imagem)
+.env
+*.env
+
+# Mídia e Estáticos (serão gerados/servidos de outra forma)
+/media/
+/staticfiles/
+

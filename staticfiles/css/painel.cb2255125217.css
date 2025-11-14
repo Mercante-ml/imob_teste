@@ -1,0 +1,493 @@
+/* static/css/painel.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a; /* Fundo escuro para um visual elegante */
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; /* Esconde barras de rolagem horizontais que podem aparecer com o grid */
+}
+
+.painel-container {
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    width: 95%;
+    max-width: 1200px; /* Aumentado para acomodar a visão semanal */
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #e0b06b; /* Cor dourada/bronze para o título */
+    font-size: 2.8em;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+h2 {
+    color: #f0f0f0;
+    font-size: 1.8em;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+/* Estilos para a lista de agendamentos (Visão Diária) */
+#agendamentos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os itens */
+    max-height: 60vh; /* Permite rolagem se houver muitos itens */
+    overflow-y: auto;
+    padding-right: 10px; /* Espaço para a barra de rolagem */
+}
+
+.agendamento-item {
+    background-color: #3a3a3a;
+    border-left: 5px solid #e0b06b;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    animation: slideInLeft 0.7s ease-out;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agendamento-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.agendamento-item .hora {
+    font-weight: bold;
+    color: #a0d9e0; /* Azul claro para o horário */
+    min-width: 70px;
+    text-align: left;
+}
+
+.agendamento-item .cliente {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.agendamento-item .barbeiro {
+    font-style: italic;
+    color: #b0b0b0;
+    margin-left: 15px;
+    min-width: 120px;
+    text-align: right;
+}
+
+.agendamento-item .servico {
+    background-color: #555;
+    color: #eee;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    margin-left: 15px;
+}
+
+.agendamento-item .status-display {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 15px;
+    white-space: nowrap; /* Garante que o status não quebre a linha */
+}
+
+/* Cores para cada status */
+.agendamento-item .status-display.confirmado {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.agendamento-item .status-display.pendente {
+    background-color: #ffc107; /* Amarelo */
+    color: #333; /* Texto escuro para contraste no amarelo */
+}
+
+.agendamento-item .status-display.realizado {
+    background-color: #007bff; /* Azul */
+    color: white;
+}
+
+.agendamento-item .status-display.cancelado {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+p {
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+.no-appointments {
+    text-align: center;
+    color: #aaa;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+/* Estilos para a navegação de data (botões e seletor) */
+.date-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaço entre os elementos */
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre label e input */
+    margin: 5px 0; /* Espaçamento vertical */
+}
+
+.date-selector label {
+    white-space: nowrap; /* Evita quebra de linha da label */
+}
+
+.date-selector input[type="date"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: #eee;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    flex-grow: 1; /* Permite que o input cresça */
+    min-width: 150px; /* Garante que o input não fique muito pequeno */
+}
+/* Altera a cor do texto do input date no Chrome para ser visível no dark mode */
+.date-selector input[type="date"]::-webkit-datetime-edit {
+    color: #eee;
+}
+.date-selector input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverte a cor do ícone do calendário para ser visível */
+}
+
+.nav-button {
+    background-color: #555;
+    color: #eee;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    display: flex; /* Para centralizar o conteúdo se houver espaço limitado */
+    align-items: center;
+    justify-content: center;
+    min-width: 100px; /* Garante um tamanho mínimo para os botões */
+}
+
+.nav-button:hover {
+    background-color: #777;
+}
+
+/* Estilos para o seletor de barbeiro */
+.barbeiro-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o dropdown */
+    margin-bottom: 20px;
+    gap: 10px; /* Espaço entre label e select */
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+}
+
+.barbeiro-selector label {
+    color: #f0f0f0;
+    font-size: 1.1em;
+    white-space: nowrap;
+}
+
+.barbeiro-selector select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: #eee;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    flex-grow: 1; /* Permite que o select cresça */
+    min-width: 180px; /* Garante tamanho mínimo */
+}
+
+.barbeiro-selector select:hover {
+    border-color: #e0b06b; /* Cor de destaque no hover */
+}
+
+/* Estilos para o alternador de visão (Diária/Semanal) */
+.view-switcher {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px; /* Espaço entre os botões */
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+}
+
+.view-button {
+    background-color: #555;
+    color: #eee;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    min-width: 120px;
+    text-align: center;
+}
+
+.view-button:hover {
+    background-color: #777;
+}
+
+.view-button.active {
+    background-color: #e0b06b; /* Cor de destaque para o botão ativo */
+    color: #333;
+}
+
+/* Estilos para a Visão Semanal em Colunas (Grade) */
+#agendamentos-weekly-grid {
+    display: grid;
+    /* 7 colunas flexíveis, adaptando-se. Ajuste minmax conforme o espaço. */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 15px; /* Espaço entre as colunas */
+    margin-top: 20px;
+    overflow-x: auto; /* Permite rolagem horizontal se não couber tudo */
+    padding-bottom: 10px; /* Espaço para barra de rolagem horizontal */
+    justify-content: center; /* Centraliza as colunas se houver espaço extra */
+}
+
+.weekly-day-column {
+    background-color: #3a3a3a;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    text-align: left;
+    min-height: 250px; /* Altura mínima para as colunas, ajuste conforme necessário */
+    display: flex;
+    flex-direction: column;
+}
+
+.weekly-day-column h3 {
+    color: #a0d9e0;
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    text-align: center; /* Centraliza o título do dia */
+}
+
+.agendamento-item-small {
+    background-color: #4a4a4a;
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    transition: background-color 0.2s ease;
+}
+
+.agendamento-item-small:hover {
+    background-color: #5a5a5a;
+}
+
+.agendamento-item-small .hora {
+    font-weight: bold;
+    color: #e0b06b;
+    display: block; 
+}
+
+.agendamento-item-small .cliente,
+.agendamento-item-small .barbeiro,
+.agendamento-item-small .servico {
+    display: block;
+    color: #ccc;
+    white-space: nowrap; /* Evita quebra de linha para nomes longos */
+    overflow: hidden; /* Esconde o excesso de texto */
+    text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+}
+.agendamento-item-small .barbeiro {
+    font-style: italic;
+    font-size: 0.85em;
+}
+
+.no-appointments-small {
+    font-size: 0.9em;
+    color: #aaa;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Ajustes responsivos gerais */
+@media (max-width: 1200px) {
+    .painel-container {
+        max-width: 900px;
+    }
+}
+@media (max-width: 1024px) { /* Tablets em paisagem */
+    .painel-container {
+        max-width: 760px;
+    }
+    #agendamentos-weekly-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Ajuste para caber 7 dias em linha ou menos */
+        gap: 10px;
+    }
+    .weekly-day-column h3 {
+        font-size: 1.2em;
+    }
+    .agendamento-item-small {
+        font-size: 0.85em;
+        padding: 6px 8px;
+    }
+}
+@media (max-width: 768px) { /* Tablets em retrato e celulares maiores */
+    .painel-container {
+        padding: 20px;
+        width: 98%;
+        max-width: none;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    .date-navigation, .barbeiro-selector, .view-switcher {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .date-selector, .barbeiro-selector select, .view-button, .nav-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .date-selector input[type="date"] {
+        width: calc(100% - 20px); /* Ajuste para padding */
+    }
+    .agendamento-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .agendamento-item .hora,
+    .agendamento-item .cliente,
+    .agendamento-item .barbeiro,
+    .agendamento-item .servico,
+    .agendamento-item .senha {
+        margin: 0;
+        width: 100%;
+        text-align: left;
+    }
+    .agendamento-item .senha {
+        margin-top: 10px;
+        align-self: flex-end;
+        width: auto;
+        border-radius: 8px; /* Não totalmente redondo em telas menores */
+    }
+    #agendamentos-weekly-grid {
+        grid-template-columns: 1fr; /* Uma coluna por dia em telas pequenas */
+        gap: 10px;
+    }
+}
+
+/* Estilos para o seletor de status (similar ao barbeiro-selector) */
+.status-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.status-selector label {
+    color: #f0f0f0;
+    font-size: 1.1em;
+    white-space: nowrap;
+}
+
+.status-selector select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: #eee;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    flex-grow: 1;
+    min-width: 180px;
+}
+
+.status-selector select:hover {
+    border-color: #e0b06b;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .status-selector {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .status-selector select {
+        width: 100%;
+    }
+}
+
+/* Estilos para o botão do Power BI */
+.powerbi-button-container {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.powerbi-button {
+    background-color: #0078d4; /* Cor azul padrão do Power BI */
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Para que padding e margin funcionem bem */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.powerbi-button:hover {
+    background-color: #005a9e; /* Tom mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+/* Ajuste responsivo, se necessário */
+@media (max-width: 768px) {
+    .powerbi-button {
+        width: calc(100% - 40px); /* Ajusta para preencher a largura com padding */
+        padding: 12px 0; /* Padding vertical, 0 horizontal */
+        margin: 0 20px; /* Margem para não colar nas bordas */
+    }
+}

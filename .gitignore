@@ -1,0 +1,24 @@
+# .gitignore
+
+# Ignorar variáveis de ambiente
+.env
+
+# Ignorar pasta do projeto Power BI
+pbi/
+
+# Outros padrões comuns para projetos Django e Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/        # Se você usa VS Code e não quer versionar suas configs locais
+db.sqlite3      # Se você usa SQLite em desenvolvimento e não quer versionar o banco
+
+
+# Ambientes virtuais
+venv/
+
+db.sqlite3
+
+
+
+
